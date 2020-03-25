@@ -29,7 +29,7 @@ class _MyAppState extends State<MyApp> {
         GlobalWidgetsLocalizations.delegate,
         S.delegate
       ],
-      supportedLocales: S.delegate.supportedLocales,
+      supportedLocales: S.delegate.supportedLocales[3],//TODO: IN FUTURE BUILDS REMOVE [3] SO ALL LOCALES ARE SUPPORTED
       theme: ThemeData(
         scaffoldBackgroundColor: Constants.backgroundColor,
         primaryColor: Constants.primaryColor,
