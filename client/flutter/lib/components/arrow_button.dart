@@ -2,17 +2,20 @@ import 'package:flutter/material.dart';
 
 class ArrowButton extends StatelessWidget {
   const ArrowButton(
-      {@required this.onPressed, @required this.color, @required this.title});
+      {@required this.onPressed, @required this.color, @required this.title, this.borderRadius, this.padding});
 
   final Function onPressed;
   final Color color;
   final String title;
+  final RoundedRectangleBorder borderRadius;
+  final EdgeInsets padding;
 
   @override
   Widget build(BuildContext context) {
     return FlatButton(
-      shape: StadiumBorder(),
-      padding: EdgeInsets.symmetric(vertical: 24, horizontal: 23),
+      shape: this.borderRadius ?? StadiumBorder(),
+      
+      padding: this.padding ?? EdgeInsets.symmetric(vertical: 24, horizontal: 23),
       color: this.color,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

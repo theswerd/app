@@ -5,6 +5,7 @@ import 'package:WHOFlutter/components/page_scaffold/page_scaffold.dart';
 import 'package:WHOFlutter/generated/l10n.dart';
 import 'package:WHOFlutter/main.dart';
 import 'package:WHOFlutter/pages/about_page.dart';
+import 'package:WHOFlutter/pages/get_the_facts/get_the_facts.dart';
 import 'package:WHOFlutter/pages/latest_numbers.dart';
 import 'package:WHOFlutter/pages/news_feed.dart';
 import 'package:WHOFlutter/pages/protect_yourself.dart';
@@ -228,12 +229,7 @@ class _MenuGrid extends StatelessWidget {
     logAnalyticsEvent('GetTheFacts');
     Navigator.push(
       context,
-      MaterialPageRoute(
-        builder: (c) => QuestionIndexPage(
-          dataSource: QuestionData.whoMythbusters,
-          title: S.of(context).homePagePageButtonWHOMythBusters,
-        ),
-      ),
+      MaterialPageRoute(builder: (c)=>GetTheFacts())
     );
   }
 
