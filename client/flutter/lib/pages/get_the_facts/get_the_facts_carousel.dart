@@ -8,19 +8,23 @@ class CarouselView extends StatelessWidget {
   CarouselView({@required this.carouselItems});
 
   final pageIndexNotifier = ValueNotifier<int>(0);
+  final pageController = PageController(
+    viewportFraction: .8
+  );
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
         Container(
-          height: 400,
+          height: 450,
           alignment: Alignment.bottomCenter,
-          padding: EdgeInsets.all(15),
           child: PageView(
+            controller: this.pageController,
             onPageChanged: (index) => pageIndexNotifier.value = index,
             children: this.carouselItems,
             pageSnapping: true,
+            
           ),
         ),
         PageViewIndicator(
@@ -60,13 +64,14 @@ class CarouselItem extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: FlatButton(
         onPressed: () {},
+        padding: EdgeInsets.all(24),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         color: this.color,
         child: Stack(
           children: <Widget>[
             Html(
               data: this.message,
-              defaultTextStyle: TextStyle(fontSize: 32),
+              defaultTextStyle: TextStyle(fontSize: 35),
               customTextStyle: (node, textStyle) {
                 if (node.attributes.containsKey("pink")) {
                   return textStyle.copyWith(
@@ -81,8 +86,9 @@ class CarouselItem extends StatelessWidget {
                 bottom: 10,
                 right: 0,
                 child: FlatButton(
+                  padding: EdgeInsets.all(25),
                   color: Colors.white.withOpacity(.2),
-                  child: Text("Learn more"),
+                  child: Text("Learn more", textScaleFactor: 1.5),
                   shape: StadiumBorder(),
                   onPressed: () {},
                 ),

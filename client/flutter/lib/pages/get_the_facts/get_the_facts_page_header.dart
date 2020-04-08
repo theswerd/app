@@ -9,42 +9,46 @@ class GetTheFactsPageHeader extends StatelessWidget {
   final int maxLines;
   @override
   Widget build(BuildContext context) {
-    return Wrap(
-      crossAxisAlignment: WrapCrossAlignment.start,
-      children: <Widget>[
-        IconButton(
-          icon: Icon(Icons.menu),
-          onPressed: () => showCupertinoModalPopup(
-              context: context, builder: (c) => CupertinoActionSheet(
-                title: Text("Menu options"),
-                cancelButton: CupertinoActionSheetAction(
-                  child: Text("Cancel"),
-                  onPressed: ()=>Navigator.pop(context)
+    return SafeArea(
+      
+          child: Padding(
+        padding: const EdgeInsets.only(left: 50.0, top: 50),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            IconButton(
+                padding: EdgeInsets.zero,
+                icon: Icon(Icons.arrow_back_ios),
+                onPressed: () => Navigator.pop(context)),
+            Stack(
+              overflow: Overflow.visible,
+              children: <Widget>[
+                Positioned(
+                  top: -100,
+                  right: 0,
+                  child: Container(
+                    height: 149,
+                    width: 145,
+                    color: Colors.black,
+                  ),
                 ),
-                actions: <Widget>[
-                  CupertinoActionSheetAction(onPressed: (){
-                    Navigator.pop(context);
-                    Navigator.pop(context);
-                  }, child: Text("Home")),
-                  CupertinoActionSheetAction(onPressed: (){
-                    
-                  }, child: Text("Home"))
-                ],
-              )),
+                AutoSizeText(
+                  this.title,
+                  wrapWords: true,
+                  maxLines: this.maxLines,
+                  maxFontSize: 80,
+                  minFontSize: 50,
+                  style: TextStyle(
+                    letterSpacing: -2,
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromRGBO(51, 102, 204, 1),
+                  ),
+                ),
+              ],
+            ),
+          ],
         ),
-        AutoSizeText(
-          this.title,
-          wrapWords: true,
-
-          maxLines: this.maxLines,
-          maxFontSize: 80,
-          minFontSize: 50,
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Color.fromRGBO(51, 102, 204, 1),
-          ),
-        ),
-      ],
+      ),
     );
   }
 }

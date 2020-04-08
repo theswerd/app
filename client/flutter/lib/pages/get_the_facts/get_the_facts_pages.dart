@@ -12,12 +12,17 @@ class GetTheFactsPage extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        GetTheFactsPageHeader(title: this.title, maxLines: this.titleMaxLines,),
-        ...this.body
-      ],
+    return Material(
+          child: SafeArea(
+                      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+            GetTheFactsPageHeader(title: this.title, maxLines: this.titleMaxLines,),
+            
+            ...this.body
+        ],
+      ),
+          ),
     );
   }
 }
