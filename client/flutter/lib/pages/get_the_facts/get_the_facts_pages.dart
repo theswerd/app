@@ -15,7 +15,6 @@ class GetTheFactsPage extends StatelessWidget {
     return Material(
           child: SafeArea(
                       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
             GetTheFactsPageHeader(title: this.title, maxLines: this.titleMaxLines,),
             

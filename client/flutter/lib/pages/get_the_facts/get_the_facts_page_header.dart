@@ -16,10 +16,6 @@ class GetTheFactsPageHeader extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            IconButton(
-                padding: EdgeInsets.zero,
-                icon: Icon(Icons.arrow_back_ios),
-                onPressed: () => Navigator.pop(context)),
             Stack(
               overflow: Overflow.visible,
               children: <Widget>[
