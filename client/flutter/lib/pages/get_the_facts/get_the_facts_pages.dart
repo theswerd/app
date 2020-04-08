@@ -3,17 +3,20 @@ import 'package:flutter/material.dart';
 
 class GetTheFactsPage extends StatelessWidget {
   final String title;
-  final Widget body;
+  final List<Widget> body;
+  final int titleMaxLines;
   const GetTheFactsPage({
     @required this.title,
-    @required this.body
+    @required this.body,
+    this.titleMaxLines
   });
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: <Widget>[
-        GetTheFactsPageHeader(title: this.title),
-        this.body
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>[
+        GetTheFactsPageHeader(title: this.title, maxLines: this.titleMaxLines,),
+        ...this.body
       ],
     );
   }

@@ -1,52 +1,50 @@
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class GetTheFactsPageHeader extends StatelessWidget {
-  const GetTheFactsPageHeader({
-    @required this.title
-  });
+  const GetTheFactsPageHeader({@required this.title, this.maxLines = 3});
 
   final String title;
-
+  final int maxLines;
   @override
   Widget build(BuildContext context) {
-    return SliverPersistentHeader(delegate: GetTheFactsHeaderDelegate(this.title), pinned: true,);
-  }
-}
+    return Wrap(
+      crossAxisAlignment: WrapCrossAlignment.start,
+      children: <Widget>[
+        IconButton(
+          icon: Icon(Icons.menu),
+          onPressed: () => showCupertinoModalPopup(
+              context: context, builder: (c) => CupertinoActionSheet(
+                title: Text("Menu options"),
+                cancelButton: CupertinoActionSheetAction(
+                  child: Text("Cancel"),
+                  onPressed: ()=>Navigator.pop(context)
+                ),
+                actions: <Widget>[
+                  CupertinoActionSheetAction(onPressed: (){
+                    Navigator.pop(context);
+                    Navigator.pop(context);
+                  }, child: Text("Home")),
+                  CupertinoActionSheetAction(onPressed: (){
+                    
+                  }, child: Text("Home"))
+                ],
+              )),
+        ),
+        AutoSizeText(
+          this.title,
+          wrapWords: true,
 
-class GetTheFactsHeaderDelegate extends SliverPersistentHeaderDelegate {
-  GetTheFactsHeaderDelegate(this.title);
-  final double maxSize = 220;
-  final String title;
-  @override
-  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return Container(
-      color: Colors.white,
-      child: LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints){
-          return Padding(
-            padding: const EdgeInsets.only(left:8.0,bottom: 8),
-            child: Wrap(
-              children: <Widget>[
-                IconButton(icon:Icon(Icons.menu), onPressed: (){},),
-                Text(this.title, style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Color.fromRGBO(51, 102, 204, 1),
-                  fontSize: 71 * constraints.maxHeight/this.maxSize
-                ),),
-              ],
-            ),
-          );
-        },
-      ),
+          maxLines: this.maxLines,
+          maxFontSize: 80,
+          minFontSize: 50,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Color.fromRGBO(51, 102, 204, 1),
+          ),
+        ),
+      ],
     );
   }
-
-  @override
-  double get maxExtent => this.maxSize;
-
-  @override
-  double get minExtent => 100;
-
-  @override
-  bool shouldRebuild(SliverPersistentHeaderDelegate _) => true;
 }
