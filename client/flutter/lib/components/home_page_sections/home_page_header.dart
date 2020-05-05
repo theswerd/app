@@ -1,54 +1,43 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:who_app/api/content/schema/index_content.dart';
+import 'package:who_app/api/linking.dart';
 import 'package:who_app/components/themed_text.dart';
 import 'package:who_app/constants.dart';
 import 'package:who_app/generated/l10n.dart';
 
 class HomePageHeader extends StatelessWidget {
-  final HeaderType headerType;
-  final BuildContext context;
+  final IndexPromoType headerType;
+  final String title;
+  final String subtitle;
+  final String buttonText;
+  final RouteLink link;
 
-  const HomePageHeader(this.headerType, this.context);
-
-  String title(BuildContext context) {
-    switch (this.headerType) {
-      case HeaderType.CheckYourSymptoms:
-        return "Check your symptoms";
-      case HeaderType.ProtectYourself:
-        return "Protect Yourself";
-      default:
-        return "Check your symptoms";
-    }
-  }
-
-  String buttonText(BuildContext context) {
-    switch (this.headerType) {
-      case HeaderType.CheckYourSymptoms:
-        return "Check now";
-      case HeaderType.ProtectYourself:
-        return "Learn more";
-      default:
-        return "Check now";
-    }
-  }
+  const HomePageHeader({
+    @required this.headerType,
+    @required this.title,
+    @required this.subtitle,
+    @required this.buttonText,
+    @required this.link,
+  });
 
   String get svgAssetName {
     switch (this.headerType) {
-      // case HeaderType.CheckYourSymptoms:
+      // case IndexPromoType.CheckYourSymptoms:
       //   return "assets/svg/home_page_header/check_your_symptoms.svg";
-      // case HeaderType.ProtectYourself:
+      // case IndexPromoType.ProtectYourself:
       //   return "assets/svg/home_page_header/protect_yourself.svg";
       default:
         return null;
     }
   }
 
-  Color get backgroundColor {
+  Color backgroundColor(BuildContext context) {
     switch (this.headerType) {
-      case HeaderType.CheckYourSymptoms:
+      case IndexPromoType.CheckYourSymptoms:
         return AppTheme(context).primaryDarkColor;
-      case HeaderType.ProtectYourself:
+      case IndexPromoType.ProtectYourself:
         return Color(0xff4ACA8C);
       default:
         return AppTheme(context).primaryDarkColor;
@@ -111,7 +100,7 @@ class HomePageHeader extends StatelessWidget {
                 height: 32,
               ),
               ThemedText(
-                this.title(context),
+                this.title,
                 variant: TypographyVariant.title,
                 style: TextStyle(
                   color: CupertinoColors.white,
@@ -119,7 +108,7 @@ class HomePageHeader extends StatelessWidget {
                 textAlign: TextAlign.left,
               ),
               ThemedText(
-                "See what your symptoms could mean and what you can do to move forward.",
+                this.subtitle,
                 variant: TypographyVariant.body,
                 style: TextStyle(
                   color: CupertinoColors.white,
@@ -148,11 +137,13 @@ class HomePageHeader extends StatelessWidget {
                           ? CupertinoColors.white
                           : CupertinoColors.systemGrey4,
                       child: ThemedText(
-                        this.buttonText(context),
+                        this.buttonText,
                         variant: TypographyVariant.button,
                         style: TextStyle(color: AppTheme(context).primaryColor),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        return this.link.open(context);
+                      },
                     ),
                   ),
                 ],
@@ -185,11 +176,6 @@ class HeaderClipper extends CustomClipper<Path> {
 
   @override
   bool shouldReclip(CustomClipper<Path> path) {
-    return true;
+    return false;
   }
-}
-
-enum HeaderType {
-  CheckYourSymptoms,
-  ProtectYourself,
 }

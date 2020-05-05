@@ -66,8 +66,7 @@ class HomePageInformationCard extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
-                      return Navigator.of(context, rootNavigator: true)
-                          .pushNamed(this.link.route, arguments: link.args);
+                      return this.link.open(context);
                     },
                   )
                 ],
