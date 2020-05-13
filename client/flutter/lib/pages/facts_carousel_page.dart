@@ -3,6 +3,7 @@ import 'package:who_app/components/carousel/carousel.dart';
 import 'package:who_app/components/carousel/carousel_slide.dart';
 import 'package:who_app/components/dialogs.dart';
 import 'package:who_app/components/page_scaffold/page_header.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:who_app/pages/main_pages/routes.dart';
@@ -51,24 +52,29 @@ class _FactsCarouselPageState extends State<FactsCarouselPage> {
 
   @override
   Widget build(BuildContext context) {
-    List items = (_factContent?.items ?? [])
-        .map((fact) => CarouselSlide(
-              key: UniqueKey(),
-              title: fact.title,
-              graphic: _getSVG(fact.imageName),
-              body: fact.body,
-            ))
-        .toList();
+    List items = (_factContent?.items ?? []).asMap().entries.map((entry) {
+      int index = entry.key;
+      FactItem fact = entry.value;
+      return CarouselSlide(
+        key: UniqueKey(),
+        title: fact.title,
+        graphic: _getSVG(fact.imageName),
+        body: fact.body,
+        index: index,
+      );
+    }).toList();
 
-    return CupertinoPageScaffold(
-      navigationBar: CupertinoNavigationBar(
-        heroTag: HeroTags.learn,
-        backgroundColor: CupertinoColors.white,
-        middle: PageHeader.buildTitle("Get the Facts"),
-        transitionBetweenRoutes: false,
+    return Material(
+      child: CupertinoPageScaffold(
+        navigationBar: CupertinoNavigationBar(
+          heroTag: HeroTags.learn,
+          backgroundColor: CupertinoColors.white,
+          middle: PageHeader.buildTitle("Get the Facts"),
+          transitionBetweenRoutes: false,
+        ),
+        child: Container(
+            child: items.isNotEmpty ? CarouselView(items: items) : Container()),
       ),
-      child: Container(
-          child: items.isNotEmpty ? CarouselView(items: items) : Container()),
     );
   }
 

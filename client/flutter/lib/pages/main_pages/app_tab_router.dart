@@ -6,17 +6,18 @@ import 'package:who_app/pages/main_pages/home_page.dart';
 import 'package:who_app/pages/main_pages/learn_page.dart';
 import 'package:who_app/pages/settings_page.dart';
 import 'package:who_app/pages/symptom_checker/symptom_checker_page.dart';
+import 'package:flutter/material.dart';
 
 class AppTabRouter extends StatelessWidget {
   static final List<Widget Function(BuildContext)> defaultTabs = [
     (context) => HomePage(
           dataSource: IndexContent.homeIndex,
         ),
-    (context) => RecentNumbersPage(),
+    (context) => SymptomCheckerPage(),
     (context) => LearnPage(
           dataSource: IndexContent.learnIndex,
         ),
-    (context) => SymptomCheckerPage(),
+    (context) => RecentNumbersPage(),
     (context) => SettingsPage(),
   ];
 
@@ -26,11 +27,11 @@ class AppTabRouter extends StatelessWidget {
         icon: Icon(CupertinoIcons.home),
         title: Text("Home")),
     BottomNavigationBarItem(
-        icon: Icon(CupertinoIcons.circle), title: Text("Stats")),
+        icon: Icon(CupertinoIcons.lab_flask), title: Text("Check-Up")),
     BottomNavigationBarItem(
         icon: Icon(CupertinoIcons.search), title: Text("Learn")),
     BottomNavigationBarItem(
-        icon: Icon(CupertinoIcons.lab_flask), title: Text("Check-Up")),
+        icon: Icon(CupertinoIcons.circle), title: Text("Stats")),
     BottomNavigationBarItem(
         icon: Icon(CupertinoIcons.person), title: Text("Settings")),
   ];
@@ -40,9 +41,11 @@ class AppTabRouter extends StatelessWidget {
 
   AppTabRouter(this.tabs, this.navItems);
 
-  CupertinoTabView wrapTabView(Widget Function(BuildContext) builder) {
-    return CupertinoTabView(
-      builder: builder,
+  Widget wrapTabView(Widget Function(BuildContext) builder) {
+    return Material(
+      child: CupertinoTabView(
+        builder: builder,
+      ),
     );
   }
 
