@@ -66,9 +66,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
                     Button(
-                      onPressed: () async {
-                        await _allowNotifications();
-                      },
+                      onPressed: _allowNotifications,
                       color: Constants.whoBackgroundBlueColor,
                       borderRadius: BorderRadius.circular(50.0),
                       child: Container(
@@ -89,9 +87,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
                       ),
                     ),
                     CupertinoButton(
-                      onPressed: () async {
-                        await _skipNotifications();
-                      },
+                      onPressed:  _skipNotifications,
                       child: ThemedText(
                         S.of(context).commonPermissionRequestPageButtonSkip,
                         variant: TypographyVariant.button,

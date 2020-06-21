@@ -45,9 +45,7 @@ class CountryListPage extends StatelessWidget {
       child: Material(
         color: CupertinoColors.white,
         child: InkWell(
-          onTap: () async {
-            await this.onCountrySelected(country);
-          },
+          onTap: this.onCountrySelected(country),
           child: Column(
             children: <Widget>[
               Row(
