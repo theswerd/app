@@ -1,3 +1,4 @@
+import 'package:WHOFlutter/components/themed_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -56,7 +57,10 @@ class CountrySelectPage extends StatelessWidget {
                   ),
                 ),
               ),
-              _buildOpenListRow(),
+              OpenListRow(
+                onOpenCountryList: onOpenCountryList,
+                countryName: countryName,
+              ),
               Padding(
                 padding: EdgeInsets.fromLTRB(24.0, 32.0, 24.0, 112.0),
                 child: Material(
@@ -92,8 +96,20 @@ class CountrySelectPage extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildOpenListRow() {
+class OpenListRow extends StatelessWidget {
+  const OpenListRow({
+    Key key,
+    @required this.onOpenCountryList,
+    @required this.countryName,
+  }) : super(key: key);
+
+  final Function onOpenCountryList;
+  final String countryName;
+
+  @override
+  Widget build(BuildContext context) {
     return Material(
       color: CupertinoColors.white,
       child: InkWell(
@@ -102,7 +118,7 @@ class CountrySelectPage extends StatelessWidget {
           decoration: BoxDecoration(
               border: Border(
             bottom: BorderSide(
-              color: Constants.neutral3Color,
+              color: Contants.neutral3Color,
               width: 0.5,
             ),
             top: BorderSide(

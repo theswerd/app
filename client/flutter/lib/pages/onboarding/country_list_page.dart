@@ -40,53 +40,51 @@ class CountryListPage extends StatelessWidget {
         .toList();
   }
 
-  Widget _buildCountryItem(IsoCountry country) {
-    return SliverToBoxAdapter(
-      child: Material(
-        color: CupertinoColors.white,
-        child: InkWell(
-          onTap: this.onCountrySelected(country),
-          child: Column(
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: ThemedText(
-                        country.name,
-                        variant: TypographyVariant.button,
-                        style: TextStyle(
-                          color: Constants.neutral2Color,
-                          height: 28.0 / 16.0,
+  Widget _buildCountryItem(IsoCountry country) => SliverToBoxAdapter(
+        child: Material(
+          color: CupertinoColors.white,
+          child: InkWell(
+            onTap: this.onCountrySelected(country),
+            child: Column(
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: ThemedText(
+                          country.name,
+                          variant: TypographyVariant.button,
+                          style: TextStyle(
+                            color: Constants.neutral2Color,
+                            height: 28.0 / 16.0,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  if (this.selectedCountryCode == country.alpha2Code)
-                    Container(
-                      padding:
-                          EdgeInsets.only(top: 16.0, bottom: 16.0, right: 12.0),
-                      child: FaIcon(
-                        FontAwesomeIcons.solidCheckCircle,
-                        color: Constants.successCheckColor,
+                    if (this.selectedCountryCode == country.alpha2Code)
+                      Container(
+                        padding: EdgeInsets.only(
+                            top: 16.0, bottom: 16.0, right: 12.0),
+                        child: FaIcon(
+                          FontAwesomeIcons.solidCheckCircle,
+                          color: Constants.successCheckColor,
+                        ),
                       ),
-                    ),
-                ],
-              ),
-              Padding(
-                padding: EdgeInsets.only(left: 16.0),
-                child: Container(
-                  height: 0.5,
-                  color: Constants.neutral3Color,
+                  ],
                 ),
-              )
-            ],
+                Padding(
+                  padding: EdgeInsets.only(left: 16.0),
+                  child: Container(
+                    height: 0.5,
+                    color: Constants.neutral3Color,
+                  ),
+                )
+              ],
+            ),
           ),
         ),
-      ),
-    );
-  }
+      );
 }
