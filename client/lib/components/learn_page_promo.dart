@@ -1,4 +1,7 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:who_app/api/linking.dart';
 import 'package:who_app/components/button.dart';
@@ -53,12 +56,26 @@ class LearnPagePromo extends StatelessWidget {
                     color: CupertinoColors.white,
                   ),
                 ),
-                ThemedText(
-                  subtitle,
-                  variant: TypographyVariant.body,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: CupertinoColors.white,
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Padding(
+                    padding: const EdgeInsets.all(
+                      2.0,
+                    ),
+                    child: BackdropFilter(
+                      filter: ImageFilter.blur(
+                        sigmaX: 8.0,
+                        sigmaY: 8.0,
+                      ),
+                      child: ThemedText(
+                        subtitle,
+                        variant: TypographyVariant.body,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: CupertinoColors.white,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
                 SizedBox(
