@@ -164,6 +164,14 @@ class _RecentNumbersPageState extends State<RecentNumbersPage> {
                       stats: widget.statsStore.globalStats,
                       key: Key('Global'),
                     ),
+                    Container(
+                      height: 24.0,
+                    ),
+                    ThemedText(
+                      S.of(context).latestNumbersPageDisclosure,
+                      variant: TypographyVariant.bodySmall,
+                      textAlign: TextAlign.center,
+                    ),
                   ],
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                 ),
